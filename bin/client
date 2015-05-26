@@ -1,0 +1,40 @@
+#!/bin/bash
+
+HOST="http://api.repohub.dev"
+VERSION="v1"
+
+case "$1" in
+    'repositories')
+        case "$2" in
+            'create')
+                curl -X POST $HOST/$VERSION/repositories -d repository[name]=$3 -d repository[handle]=$3 ;;
+            'delete')
+                curl -X DELETE $HOST/$VERSION/repositories/$3 ;;
+            *)
+                curl -X GET $HOST/$VERSION/repositories ;;
+        esac
+        ;;
+    'spaces')
+        case "$2" in
+            'create')
+                curl -X POST $HOST/$VERSION/spaces -d space[name]=$3 -d space[handle]=$3 ;;
+            'delete')
+                curl -X DELETE $HOST/$VERSION/spaces/$3 ;;
+            *)
+                curl -X GET $HOST/$VERSION/spaces ;;
+        esac
+        ;;
+    'developers')
+        case "$2" in
+            'create')
+                curl -X POST $HOST/$VERSION/developers -d developer[login]=$3 -d developer[email]=$4 ;;
+            'delete')
+                curl -X DELETE $HOST/$VERSION/developers/$3 ;;
+            *)
+                curl -X GET $HOST/$VERSION/developers ;;
+        esac
+        ;;
+    'keys')
+esac
+
+echo ""
