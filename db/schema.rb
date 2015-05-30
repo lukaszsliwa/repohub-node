@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526152125) do
+ActiveRecord::Schema.define(version: 20150530144044) do
 
   create_table "keys", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "token"
   end
 
+  add_index "keys", ["token"], name: "index_keys_on_token", unique: true
   add_index "keys", ["user_id"], name: "index_keys_on_user_id"
 
   create_table "repositories", force: :cascade do |t|
@@ -35,6 +37,15 @@ ActiveRecord::Schema.define(version: 20150526152125) do
   add_index "repositories", ["space_id", "handle"], name: "index_repositories_on_space_id_and_handle", unique: true
   add_index "repositories", ["space_id"], name: "index_repositories_on_space_id"
 
+  create_table "repository_users", force: :cascade do |t|
+    t.integer  "repository_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "repository_users", ["repository_id", "user_id"], name: "index_repository_users_on_repository_id_and_user_id", unique: true
+
   create_table "spaces", force: :cascade do |t|
     t.string   "name"
     t.string   "handle"
@@ -49,11 +60,14 @@ ActiveRecord::Schema.define(version: 20150526152125) do
     t.string   "login"
     t.string   "email"
     t.integer  "created_by_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "token"
+    t.boolean  "admin",         default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["login"], name: "index_users_on_login", unique: true
+  add_index "users", ["token"], name: "index_users_on_token"
 
 end

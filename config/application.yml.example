@@ -1,0 +1,13 @@
+# config/application.yml
+defaults: &defaults
+  exec:
+    url: 'http://exec.repohub.dev'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

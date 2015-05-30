@@ -1,5 +1,6 @@
 class DevelopersController < ApplicationController
   before_filter :find_developer, only: [:update, :destroy]
+  before_filter :admin_only, only: [:create, :update, :destroy]
 
   def index
     render json: User.all
@@ -20,7 +21,7 @@ class DevelopersController < ApplicationController
   end
 
   def destroy
-    @developer.destroy
+    @developer.destroy!
 
     render json: @developer
   end
@@ -32,6 +33,6 @@ class DevelopersController < ApplicationController
   end
 
   def params_developer
-    params[:developer].permit(:login, :email)
+    params.permit(:login, :email)
   end
 end

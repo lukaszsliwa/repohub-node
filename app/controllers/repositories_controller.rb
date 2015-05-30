@@ -1,6 +1,7 @@
 class RepositoriesController < ApplicationController
   before_filter :find_space
-  before_filter :find_repository, only: [:update, :destroy]
+  before_filter :find_repository, only: [:show, :update, :destroy]
+  before_filter :admin_only, only: [:create, :update, :destroy]
 
   def index
     render json: context.all
@@ -15,6 +16,10 @@ class RepositoriesController < ApplicationController
     render json: @repository
   end
 
+  def show
+    render json: @repository.as_json(include: :users)
+  end
+
   def update
     @repository.update_attributes! params_repository
 
@@ -22,7 +27,7 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    @repository.destroy
+    @repository.destroy!
 
     render json: @repository
   end
@@ -30,11 +35,13 @@ class RepositoriesController < ApplicationController
   private
 
   def find_space
-    @space ||= Space.find_by_handle params[:space_id]
+    if params[:space_id].present?
+      @space ||= (current_user.admin? ? Space : current_user.spaces).find_or_create_by(handle: params[:space_id])
+    end
   end
 
   def context
-    @space.present? ? @space.repositories : Repository
+    @space.present? ? (current_user.admin ? @space.repositories : current_user.repositories.in_space(@space.id)) : (current_user.admin ? Repository : current_user.repositories)
   end
 
   def find_repository
@@ -42,6 +49,6 @@ class RepositoriesController < ApplicationController
   end
 
   def params_repository
-    params[:repository].permit(:name, :handle)
+    params.permit(:name, :handle)
   end
 end

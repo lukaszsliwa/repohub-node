@@ -3,7 +3,7 @@ class Space < ActiveRecord::Base
 
   has_many :repositories, dependent: :destroy
 
-  validates :handle, uniqueness: true, presence: true
+  validates :handle, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }, uniqueness: true, presence: true
 
   def to_param
     handle

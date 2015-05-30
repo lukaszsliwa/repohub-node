@@ -10,6 +10,10 @@ case "$1" in
                 curl -X POST $HOST/$VERSION/repositories -d repository[name]=$3 -d repository[handle]=$3 ;;
             'delete')
                 curl -X DELETE $HOST/$VERSION/repositories/$3 ;;
+            'allow')
+                curl -X PUT $HOST/$VERSION/developers/$4/repositories/$3 ;;
+            'deny')
+                curl -X DELETE $HOST/$VERSION/developers/$4/repositories/$3 ;;
             *)
                 curl -X GET $HOST/$VERSION/repositories ;;
         esac
@@ -30,6 +34,10 @@ case "$1" in
                 curl -X POST $HOST/$VERSION/developers -d developer[login]=$3 -d developer[email]=$4 ;;
             'delete')
                 curl -X DELETE $HOST/$VERSION/developers/$3 ;;
+            'allow')
+                curl -X PUT $HOST/$VERSION/developers/$3/repositories/$4 ;;
+            'deny')
+                curl -X DELETE $HOST/$VERSION/developers/$4/repositories/$3 ;;
             *)
                 curl -X GET $HOST/$VERSION/developers ;;
         esac
