@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Serialization
+
   before_filter :current_user
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
