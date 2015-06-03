@@ -8,10 +8,10 @@ class RepositoryUser < ActiveRecord::Base
   validates :repository_id, uniqueness: {scope: :user_id}
 
   def exec_repository_user_create
-    Exec::Client::User.find(user.login).post(:link, space: repository.space.try(:handle), handle: repository.handle, id: repository.id)
+    Exec::Client::User.find(user.login).post(:link, space: repository.space.try(:handle), handle: repository.handle, id: repository.token)
   end
 
   def exec_repository_user_destroy
-    Exec::Client::User.find(user.login).delete(:link, space: repository.space.try(:handle), handle: repository.handle, id: repository.id)
+    Exec::Client::User.find(user.login).delete(:link, space: repository.space.try(:handle), handle: repository.handle, id: repository.token)
   end
 end

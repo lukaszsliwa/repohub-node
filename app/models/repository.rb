@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class Repository < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :space
@@ -5,12 +7,20 @@ class Repository < ActiveRecord::Base
   has_many :repository_users, dependent: :destroy
   has_many :users, through: :repository_users
 
-  after_create  :exec_client_repository_create
-  after_destroy :exec_client_repository_delete
+  before_validation :generate_token, on: :create
+
+  before_create  :exec_client_repository_create
+  before_destroy :exec_client_repository_delete
 
   validates :handle, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }, uniqueness: {scope: :space_id}, presence: true
 
   scope :in_space, ->(space_id) { where(space_id: space_id) }
+
+  def generate_token
+    begin
+      self.token = SecureRandom.hex[0..8]
+    end while Repository.where(token: self.token).exists?
+  end
 
   def to_param
     handle
@@ -25,11 +35,11 @@ class Repository < ActiveRecord::Base
   end
 
   def exec_client_repository_create
-    Exec::Client::Repository.new(db_id: id).save
+    Exec::Client::Repository.create(db_id: token)
   end
 
   def exec_client_repository_delete
-    Exec::Client::Repository.delete id
+    Exec::Client::Repository.delete token
   end
 
   def as_json(options = {})

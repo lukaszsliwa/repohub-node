@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530144044) do
+ActiveRecord::Schema.define(version: 20150603193536) do
 
   create_table "keys", force: :cascade do |t|
     t.integer  "user_id"
@@ -31,11 +31,13 @@ ActiveRecord::Schema.define(version: 20150530144044) do
     t.integer  "created_by_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "token"
   end
 
   add_index "repositories", ["handle"], name: "index_repositories_on_handle"
   add_index "repositories", ["space_id", "handle"], name: "index_repositories_on_space_id_and_handle", unique: true
   add_index "repositories", ["space_id"], name: "index_repositories_on_space_id"
+  add_index "repositories", ["token"], name: "index_repositories_on_token", unique: true
 
   create_table "repository_users", force: :cascade do |t|
     t.integer  "repository_id"
