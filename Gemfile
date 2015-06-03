@@ -14,3 +14,6 @@ gem 'exec-client', git: 'git@git.apptamers.com:repohub/exec-client.git'
 gem 'settingslogic'
 
 gem 'capistrano', '~> 3.4.0'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
