@@ -16,7 +16,9 @@ class KeysController < ApplicationController
   end
 
   def update
-    @key.update_attribute! :token, params[:token]
+    @key.token = params[:token]
+    @key.save!
+
     render json: @key
   end
 
