@@ -19,9 +19,9 @@ class Developers::RepositoriesController < Developers::ApplicationController
   def find_repository
     if params[:space_id].present?
       @space ||= Space.find_by_handle! params[:space_id]
-      @repository ||= @space.repositories.find_by_handle! params[:id]
+      @repository ||= @space.repositories.find_by_handle! params[:repository_id]
     else
-      @repository ||= Repository.find_by_handle! params[:id]
+      @repository ||= Repository.find_by_handle! params[:repository_id]
     end
   end
 end
