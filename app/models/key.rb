@@ -3,7 +3,7 @@ require 'securerandom'
 class Key < ActiveRecord::Base
   belongs_to :user
 
-  before_validation :generate_token
+  before_validation :generate_token, on: :create
 
   after_commit  :generate_authorized_keys
 
