@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :spaces, except: [:new, :show, :edit] do
       resources :repositories, except: [:new, :show, :edit]
     end
-    resources :developers, except: [:new, :show, :edit] do
+    resources :developers, except: [:new, :edit] do
       resources :repositories, only: [:update, :destroy], controller: 'developers/repositories'
     end
     resources :repositories, except: [:new, :edit]

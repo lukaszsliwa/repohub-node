@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique,  with: :record_invalid
+  rescue_from 'ActiveResource::ResourceInvalid', with: :record_invalid
 
   def current_user
     @current_user ||= User.find_by_token! request.headers['HTTP_API_KEY']
