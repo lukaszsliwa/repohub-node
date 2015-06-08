@@ -140,7 +140,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.9.3)
-  activeresource
   capistrano (~> 3.4.0)
   capistrano-bundler
   capistrano-rails
