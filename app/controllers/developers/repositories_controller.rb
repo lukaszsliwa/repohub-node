@@ -2,7 +2,7 @@ class Developers::RepositoriesController < Developers::ApplicationController
   before_filter :find_repository
   before_filter :admin_only
 
-  def update
+  def create
     @repository.users << @developer
 
     head :ok

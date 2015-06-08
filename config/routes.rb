@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :repositories, except: [:new, :show, :edit]
     end
     resources :developers, except: [:new, :edit] do
-      resources :repositories, only: [:update, :destroy], controller: 'developers/repositories'
+      resources :repositories, only: [:create, :destroy], controller: 'developers/repositories'
     end
     resources :repositories, except: [:new, :edit]
     resources :keys, only: [:index, :show, :create, :update, :destroy]
