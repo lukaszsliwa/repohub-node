@@ -5,6 +5,11 @@
 %h3 Account
 .container
   = form_for current_user, as: :user, url: settings_path, html: { method: :put } do |f|
+    - if (errors = f.object.errors.full_messages).present?
+      .row
+        %ul.errors
+          - errors.each do |error|
+            %li= error
     .row
       .col-md-6.margin-center
         .form-group
