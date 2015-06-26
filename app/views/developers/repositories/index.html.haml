@@ -1,0 +1,17 @@
+= content_for :title do
+  #{@developer.login} &middot; Repositories
+
+= link_to developers_path do
+  &laquo;
+  Back to the Developers
+
+%h3= @developer.login
+
+%table.table
+  %thead
+    %th
+    %th Repository
+    %th Uri
+    %th
+  %tbody
+    = render partial: 'developers/repositories/repository', collection: @repositories

@@ -1,0 +1,9 @@
+%tr(id="developer-#{developer.login}")
+  %td
+    - if @repository.users.exists?(developer.id)
+      %i.fa.fa-check
+  %td= developer.login
+  %td= developer.email
+  %td
+    = link_to 'Allow', repository_developer_path(@repository, developer, format: :js), method: :patch, remote: true, class: 'btn btn-default' if policy(developer).allow?
+    = link_to 'Deny', repository_developer_path(@repository, developer, format: :js), method: :delete, remote: true, class: 'btn btn-default' if policy(developer).deny?

@@ -1,0 +1,29 @@
+= content_for :title do
+  Settings
+
+%h2 Settings
+%h3 Account
+.container
+  = form_for current_user, as: :user, url: settings_path, html: { method: :put } do |f|
+    .row
+      .col-md-6.margin-center
+        .form-group
+          = f.label :email, 'E-mail'
+          = f.email_field :email, class: 'form-control'
+        .form-group
+          = f.label :first_name
+          = f.text_field :first_name, class: 'form-control'
+        .form-group
+          = f.label :last_name
+          = f.text_field :last_name, class: 'form-control'
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, class: 'form-control'
+        .form-group
+          = f.label :avatar
+          = f.file_field :avatar
+        .text-right
+          = f.submit "Update #{current_user.login}", class: 'btn btn-lg btn-success'

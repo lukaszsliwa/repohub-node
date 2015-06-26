@@ -1,0 +1,5 @@
+- if @developer.errors.present?
+  $('#new_developer').replaceWith("#{escape_javascript(render partial: 'developers/new', locals: { developer: @developer })}");
+- else
+  $('div.developers').prepend("#{escape_javascript(render partial: 'developers/developer', object: @developer)}");
+  $('#new_developer').replaceWith("#{escape_javascript(render partial: 'developers/new', locals: { developer: User.new })}");

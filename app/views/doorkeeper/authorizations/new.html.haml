@@ -1,0 +1,35 @@
+.col-md-5.margin-center
+  .authorization
+    .panel-heading
+      %header.page-header{:role => "banner"}
+        %h1= t('.title')
+    .panel-body
+      %main{:role => "main"}
+        %p.h4
+          = raw t('.prompt', client_name: "<strong class=\"text-info\">#{ @pre_auth.client.name }</strong>")
+        - if @pre_auth.scopes
+          #oauth-permissions
+            %p
+              = t('.able_to')
+              \:
+            %ul.text-info
+              - @pre_auth.scopes.each do |scope|
+                %li= t scope, scope: [:doorkeeper, :scopes]
+    .panel-footer.actions
+      .pull-left
+        = form_tag oauth_authorization_path, method: :post do
+          = hidden_field_tag :client_id, @pre_auth.client.uid
+          = hidden_field_tag :redirect_uri, @pre_auth.redirect_uri
+          = hidden_field_tag :state, @pre_auth.state
+          = hidden_field_tag :response_type, @pre_auth.response_type
+          = hidden_field_tag :scope, @pre_auth.scope
+          = submit_tag 'Authorize now', class: "btn btn-default btn-success btn-lg"
+      .pull-right
+        = form_tag oauth_authorization_path, method: :delete do
+          = hidden_field_tag :client_id, @pre_auth.client.uid
+          = hidden_field_tag :redirect_uri, @pre_auth.redirect_uri
+          = hidden_field_tag :state, @pre_auth.state
+          = hidden_field_tag :response_type, @pre_auth.response_type
+          = hidden_field_tag :scope, @pre_auth.scope
+          = submit_tag 'Cancel', class: "btn btn-default btn-lg"
+      .clearfix

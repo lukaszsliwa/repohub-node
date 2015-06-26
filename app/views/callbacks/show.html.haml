@@ -1,0 +1,13 @@
+.progress
+  .progress-bar(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%;")
+    %span.sr-only 60% Complete
+
+:javascript
+  $(function() {
+    var url = '#{oauth_token_url(client_id: @app.uid, client_secret: @app.secret, code: params[:code], grant_type: 'authorization_code', redirect_uri: @app.redirect_uri)}';
+    $.post(url, function(data) {
+      $('.progress-bar').attr('style', 'width: 100%');
+      console.log(data);
+      window.location = '#{app_path(@app)}';
+    });
+  });

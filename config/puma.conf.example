@@ -4,7 +4,8 @@
 #
 # The default is the current directory.
 #
-# directory '/u/apps/lolcat'
+
+directory '/work/projects/apptamers/repohub/api/'
 
 # Use an object or block as the rack application. This allows the
 # config file to be the application itself.
@@ -39,7 +40,7 @@
 
 # Store the pid of the server in the file at "path".
 #
-# pidfile '/u/apps/lolcat/tmp/pids/puma.pid'
+pidfile '/work/projects/apptamers/repohub/api/tmp/pids/puma.pid'
 
 # Use "path" as the file to store the server info state. This is
 # used by "pumactl" to query and control the server.
@@ -64,7 +65,7 @@
 #
 # The default is "0, 16".
 #
-# threads 0, 16
+threads 0, 16
 
 # Bind the server to "url". "tcp://", "unix://" and "ssl://" are the only
 # accepted protocols.
@@ -72,7 +73,7 @@
 # The default is "tcp://0.0.0.0:9292".
 #
 # bind 'tcp://0.0.0.0:9292'
-# bind 'unix:///var/run/puma.sock'
+bind 'unix:///tmp/repohub.api.puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0111'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
 
@@ -102,7 +103,7 @@
 #
 # The default is "0".
 #
-# workers 2
+workers 2
 
 # Code to run when a worker boots to setup the process before booting
 # the app.
@@ -143,7 +144,7 @@
 
 # Additional text to display in process listing
 #
-# tag 'app name'
+tag 'API'
 
 # Change the default timeout of workers
 #

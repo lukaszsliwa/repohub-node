@@ -1,0 +1,11 @@
+= content_for :title do
+  Keys
+
+.container
+  .row
+    .keys-wrapper
+      .col-xs-3
+        .key-form
+          = render partial: 'keys/new', locals: { key: Key.new }
+      .keys
+        = render partial: 'keys/key', collection: @keys

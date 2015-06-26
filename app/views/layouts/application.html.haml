@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    = render partial: 'shared/header'
+  %body(class="#{user_signed_in? ? 'signed-in' : 'not-signed-in'}")
+    = render partial: 'shared/nav'
+    = render partial: 'shared/flash'
+    .container
+      = yield
+    :javascript
+      $(function() {
+        $('#menu ul li.#{params[:controller].parameterize}').addClass('active');
+      });

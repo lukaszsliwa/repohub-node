@@ -1,6 +1,6 @@
 class RepositoryUser < ActiveRecord::Base
-  belongs_to :repository
-  belongs_to :user
+  belongs_to :repository, counter_cache: :users_count
+  belongs_to :user, counter_cache: :repositories_count
 
   after_create :exec_repository_user_create
   after_destroy :exec_repository_user_destroy

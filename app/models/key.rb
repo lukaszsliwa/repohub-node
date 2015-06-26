@@ -1,14 +1,18 @@
 require 'securerandom'
 
 class Key < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: :keys_count
 
-  before_validation :generate_token, on: :create
+  before_validation :generate_token, on: :create, if: -> { self.token.blank? }
 
   after_commit  :generate_authorized_keys
 
   validates :content, presence: true
   validates :token, uniqueness: true, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }
+
+  def filename
+    "#{token}.pub"
+  end
 
   def to_param
     token

@@ -1,38 +1,23 @@
 class SpacesController < ApplicationController
-  before_filter :find_space, only: [:update, :destroy]
-  before_filter :admin_only, only: [:create, :update, :destroy]
-
   def index
-    render json: (current_user.admin? ? Space.all : current_user.spaces.all)
+    authorize :space, :index?
+    @spaces = Space.order('id DESC').all
   end
 
   def create
-    @space = Space.new params_space
-    @space.created_by = current_user
-    @space.save!
-
-    render json: @space
-  end
-
-  def update
-    @space.update_attributes! params_space
-
-    render json: @space
+    authorize :space, :create?
+    @space = Space.create params_space
   end
 
   def destroy
-    @space.destroy!
-
-    render json: @space
+    authorize :space, :destroy?
+    @space = Space.find_by_handle! params[:id]
+    @space.destroy
   end
 
   private
 
-  def find_space
-    @space ||= (current_user.admin? ? Space : current_user.spaces).find_by_handle! params[:id]
-  end
-
   def params_space
-    params.permit(:name, :handle)
+    params[:space].permit(:handle)
   end
 end

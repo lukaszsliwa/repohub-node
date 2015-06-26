@@ -1,0 +1,2 @@
+class SpacePolicy < ApplicationPolicy
+end

@@ -1,0 +1,7 @@
+!!!
+%html
+  %head
+    = render partial: 'shared/header'
+  %body(class="#{user_signed_in? ? 'signed-in' : 'not-signed-in'}")
+    .container
+      = yield

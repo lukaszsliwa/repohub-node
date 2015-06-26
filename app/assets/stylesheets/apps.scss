@@ -1,0 +1,9 @@
+@import "mixins";
+
+div.apps {
+  @extend .panels;
+
+  div.app {
+    @include panel(100px);
+  }
+}

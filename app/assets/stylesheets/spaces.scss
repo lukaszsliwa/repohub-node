@@ -1,0 +1,16 @@
+@import "mixins";
+
+div.spaces {
+  @extend .panels;
+
+  div.space {
+    @include panel(80px);
+  }
+}
+
+div.space-form {
+  @include panel(80px);
+  .panel-body {
+    height: 120px;
+  }
+}

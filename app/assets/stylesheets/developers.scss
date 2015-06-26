@@ -1,0 +1,17 @@
+@import "mixins";
+
+div.developers {
+  @extend .panels;
+
+  div.developer {
+    @include panel(100px);
+  }
+}
+
+div.developer-form {
+  @include panel(80px);
+  .panel-body {
+    height: 120px;
+    overflow-y: scroll;
+  }
+}

@@ -1,0 +1,29 @@
+.col-xs-3(id="developer-#{developer.login}")
+  .developer
+    .panel-header
+      %i.fa.fa-user
+      = developer.login
+    .panel-body
+      .row
+        .col-xs-6
+          = link_to developer_repositories_path(developer) do
+            %h4 Repositories
+          %b= developer.repositories_count
+        .col-xs-6
+          = link_to developer_keys_path(developer) do
+            %h4 Keys
+          %b= developer.keys_count
+        .clearfix
+    .panel-footer
+      .pull-left
+        - if policy(:developer).admin? && !developer.admin
+          = link_to 'Permissions', developer_permissions_path(developer), class: 'btn btn-sm btn-default'
+      .pull-right
+        - if developer.admin
+          %i.fa.fa-star(style='color: orange')
+        - else
+          - if policy(developer).destroy?
+            = link_to 'Delete', developer_path(developer.login, format: :js), class: 'btn btn-sm btn-default', method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+          - else
+            &nbsp;
+      .clearfix

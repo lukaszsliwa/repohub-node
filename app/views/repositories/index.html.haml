@@ -1,0 +1,13 @@
+= content_for :title do
+  Repositories
+
+.container
+  .row
+    .repositories-wrapper
+      - if policy(:repository).create?
+        .col-xs-3
+          .repository-form
+            = render partial: 'repositories/new', locals: { repository: Repository.new }
+      .repositories
+        = render partial: 'repositories/repository', collection: @repositories
+

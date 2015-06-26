@@ -1,0 +1,17 @@
+@import "mixins";
+
+div.repositories {
+  @extend .panels;
+
+  div.repository {
+    @include panel(90px);
+  }
+}
+
+div.repository-form {
+  @include panel(90px);
+  .panel-body {
+    height: 120px;
+    overflow-y: scroll;
+  }
+}

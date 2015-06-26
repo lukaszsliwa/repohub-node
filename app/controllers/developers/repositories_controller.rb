@@ -1,27 +1,24 @@
 class Developers::RepositoriesController < Developers::ApplicationController
-  before_filter :find_repository
-  before_filter :admin_only
+  before_filter :find_repository, only: [:update, :destroy]
 
-  def create
+  def index
+    authorize :developer, :index?
+    @repositories = Repository.order('id DESC').all
+  end
+
+  def update
+    authorize :developer, :allow?
     @repository.users << @developer
-
-    head :ok
   end
 
   def destroy
-    @repository.repository_users.where(user_id: @developer.id).destroy_all
-
-    head :ok
+    authorize :developer, :deny?
+    RepositoryUser.where(repository_id: @repository.id, user_id: @developer.id).first!.destroy
   end
 
   private
 
   def find_repository
-    if params[:space_id].present?
-      @space ||= Space.find_by_handle! params[:space_id]
-      @repository ||= @space.repositories.find_by_handle! params[:repository_id]
-    else
-      @repository ||= Repository.find_by_handle! params[:repository_id]
-    end
+    @repository ||= Repository.find params[:id]
   end
 end

@@ -1,0 +1,11 @@
+= form_for space, as: :space, url: spaces_path(format: :js), remote: true do |f|
+  .panel-body
+    - if (errors = f.object.errors.full_messages).present?
+      .form-group
+        %ul.errors
+          - errors.each do |error|
+            %li= error
+    .form-group
+      = f.text_field :handle, class: 'form-control', placeholder: 'Handle'
+  .panel-footer
+    = submit_tag 'Create a Space', class: 'btn btn-sm btn-default'

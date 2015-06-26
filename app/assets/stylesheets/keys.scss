@@ -1,0 +1,18 @@
+@import "mixins";
+
+div.keys {
+  @extend .panels;
+
+  div.key {
+    @include panel(70px);
+  }
+}
+
+
+div.key-form {
+  @include panel(90px);
+  .panel-body {
+    height: 100px;
+    overflow-y: scroll;
+  }
+}

@@ -1,0 +1,43 @@
+= content_for :title do
+  Apps &middot; #{@app.name}
+
+%h3= @app.name
+
+.container
+  .row
+    %p
+      - if @access_token
+        = link_to 'Reauthorize', install_app_path(@app), class: 'btn btn-sm btn-default btn-success', method: :post
+        = link_to 'Uninstall', uninstall_app_path(@app), class: 'btn btn-sm btn-default btn-danger', method: :post
+      - else
+        = link_to 'Install', install_app_path(@app), class: 'btn btn-sm btn-default btn-success', method: :post
+
+  .row
+    %h4 App Id
+    = @app.uid
+
+  .row
+    %h4 App Secret
+    = link_to 'Toggle', '#', class: 'btn btn-sm btn-default', onclick: '$("#secret-active").toggleClass("hidden"); $("#secret-inactive").toggleClass("hidden"); $(this).toggleClass("active")'
+    - secret = @app.secret
+    %span#secret-active
+      #{secret[0, 10]}#{'*' * (secret.length - 10)}
+    %span#secret-inactive.hidden= secret
+
+  - if @access_token && !@access_token.expired?
+    .row
+      %h4 Access Token (will expire on #{l @access_token.expires_in.seconds.from_now(@access_token.created_at), format: :long})
+      - access_token = @access_token.token
+      = link_to 'Toggle', '#', class: 'btn btn-sm btn-default', onclick: '$("#access-token-active").toggleClass("hidden"); $("#access-token-inactive").toggleClass("hidden"); $(this).toggleClass("active")'
+      %span#access-token-active
+        #{access_token[0, 10]}#{'*' * (access_token.length - 10)}
+      %span#access-token-inactive.hidden= access_token
+
+    .row
+      %h4 Refresh Token
+      - refresh_token = @access_token.refresh_token
+      = link_to 'Toggle', '#', class: 'btn btn-sm btn-default', onclick: '$("#refresh-token-active").toggleClass("hidden"); $("#refresh-token-inactive").toggleClass("hidden"); $(this).toggleClass("active")'
+      %span#refresh-token-active
+        #{refresh_token[0, 10]}#{'*' * (refresh_token.length - 10)}
+      %span#refresh-token-inactive.hidden
+        = refresh_token

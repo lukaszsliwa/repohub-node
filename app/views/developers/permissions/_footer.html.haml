@@ -1,0 +1,5 @@
+.panel-footer
+  - if local_assigns[:allowed] || @developer.permissions.find_by_value(local_assigns[:value]).present?
+    = link_to 'Disallow', developer_permission_path(@developer, local_assigns[:value], format: :js), class: 'btn btn-sm btn-default',  remote: true, method: :delete
+  - else
+    = link_to 'Allow', developer_permission_path(@developer, local_assigns[:value], format: :js), class: 'btn btn-sm btn-default', remote: true, method: :patch

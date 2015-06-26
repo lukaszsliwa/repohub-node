@@ -1,0 +1,17 @@
+.col-xs-3(id="key-#{key.token}")
+  .key
+    .panel-header
+      %i.fa.fa-key
+      = truncate key.token, length: 20
+    .panel-body
+      = truncate key.content, length: 34
+    .panel-footer
+      .pull-left
+        = l key.created_at.to_datetime, format: :long if key.created_at
+      .pull-right
+        - if policy(key).destroy?
+          = link_to 'Delete', developer_key_path(key.user, key.token, format: :js), method: :delete, class: 'btn btn-default btn-sm', remote: true, data: { confirm: 'Are you sure?' } if key.user
+        - if policy(key).show?
+          = link_to developer_key_path(key.user, key.token, format: :pub), class: 'btn btn-default btn-sm', title: 'Download' do
+            %i.fa.fa-download
+      .clearfix

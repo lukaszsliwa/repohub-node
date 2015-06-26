@@ -1,0 +1,5 @@
+- if @repository.errors.present?
+  $('#new_repository').replaceWith("#{escape_javascript(render partial: 'repositories/new', locals: {repository: @repository})}");
+- else
+  $('div.repositories').prepend("#{escape_javascript(render partial: 'repositories/repository', object: @repository)}");
+  $('#new_repository').replaceWith("#{escape_javascript(render partial: 'repositories/new', locals: {repository: Repository.new})}");

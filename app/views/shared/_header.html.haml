@@ -1,0 +1,17 @@
+%title
+  RepoFS &middot;
+  - if content_for?(:title)
+    = yield :title
+  - else
+    Private Git Repositories &middot; Private Git Servers &middot; Unlimited Git Repositories
+%meta{charset: "utf-8"}
+%meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+%meta{content: "", name: "description"}
+%meta{content: "Łukasz Śliwa", name: "author"}
+= csrf_meta_tags
+
+= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+= javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+%link{href: "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600", rel: "stylesheet"}
+%link{href: "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300", rel: "stylesheet", type: "text/css"}

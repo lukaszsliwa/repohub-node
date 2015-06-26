@@ -1,0 +1,13 @@
+= form_for key, as: :key, url: keys_path(format: :js), remote: true do |f|
+  .panel-body
+    - if (errors = f.object.errors.full_messages).present?
+      .form-group
+        %ul.errors
+          - errors.each do |error|
+            %li= error
+    .form-group
+      = f.text_field :token, class: 'form-control', placeholder: 'Key Name'
+    .form-group
+      = f.text_area :content, class: 'form-control', placeholder: 'Content'
+  .panel-footer
+    = submit_tag 'Create a Key', class: 'btn btn-sm btn-default'

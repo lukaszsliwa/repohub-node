@@ -15,3 +15,6 @@ db/*.sqlite3
 .idea
 config/puma.conf
 config/application.yml
+public/system
+config/puma.conf
+

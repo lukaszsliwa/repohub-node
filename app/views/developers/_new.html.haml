@@ -1,0 +1,13 @@
+= form_for developer, as: :developer, url: developers_path(format: :js), remote: true do |f|
+  .panel-body
+    - if (errors = f.object.errors.full_messages).present?
+      .form-group
+        %ul.errors
+          - errors.each do |error|
+            %li= error
+    .form-group
+      = f.text_field :login, class: 'form-control', placeholder: 'Login'
+    .form-group
+      = f.email_field :email, class: 'form-control', placeholder: 'E-mail'
+  .panel-footer
+    = submit_tag 'Create a Developer', class: 'btn btn-sm btn-default'

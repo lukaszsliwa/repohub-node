@@ -1,0 +1,13 @@
+= form_for repository, as: :repository, url: repositories_path(format: :js), remote: true do |f|
+  .panel-body
+    - if (errors = f.object.errors.full_messages).present?
+      .form-group
+        %ul.errors
+          - errors.each do |error|
+            %li= error
+    .form-group
+      = f.text_field :handle, class: 'form-control', placeholder: 'Handle'
+    .form-group
+      = f.select :space_id, Space.all.map {|s| [s.handle, s.id] }, class: 'form-control', placeholder: 'Work space', include_blank: true
+  .panel-footer
+    = submit_tag 'Create a Repository', class: 'btn btn-sm btn-default'

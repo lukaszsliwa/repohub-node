@@ -1,0 +1,5 @@
+- if @key.errors.present?
+  $('#new_key').replaceWith("#{escape_javascript(render partial: 'keys/new', locals: {key: @key})}");
+- else
+  $('div.keys').prepend("#{escape_javascript(render partial: 'keys/key', object: @key)}");
+  $('#new_key').replaceWith("#{escape_javascript(render partial: 'keys/new', locals: {key: Key.new})}");

@@ -1,0 +1,13 @@
+%nav.navbar
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => "#menu", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'RepoFS', dashboard_path, class: 'navbar-brand' if user_signed_in?
+      = link_to 'RepoFS', root_path, class: 'navbar-brand'      unless user_signed_in?
+    #menu.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        = render partial: 'shared/nav_user'  if user_signed_in?

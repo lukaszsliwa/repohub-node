@@ -1,0 +1,30 @@
+= content_for :title do
+  Apps
+
+.container
+  .row
+    .apps-wrapper
+      .apps
+        - @authorized_apps.each do |app|
+          .col-xs-3
+            .app(id="grant-#{app.id}")
+              .panel-body
+                = app.name
+              .panel-footer
+                .pull-left
+                  = link_to 'Show', app_path(app), class: 'btn btn-sm btn-default'
+                .pull-right
+                  = link_to 'Reauthorize', install_app_path(app), class: 'btn btn-sm btn-default btn-success', method: :post
+                  = link_to 'Uninstall', uninstall_app_path(app), class: 'btn btn-sm btn-default btn-danger', method: :post
+                .clearfix
+        - @apps.each do |app|
+          .col-xs-3
+            .app(id="app-#{app.id}")
+              .panel-body
+                = app.name
+              .panel-footer
+                .pull-left
+                  = link_to 'Show', app_path(app), class: 'btn btn-sm btn-default'
+                .pull-right
+                  = link_to 'Install', install_app_path(app), class: 'btn btn-sm btn-default btn-success', method: :post
+                .clearfix

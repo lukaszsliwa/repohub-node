@@ -1,0 +1,124 @@
+= content_for :title do
+  #{@developer.login} &middot; Permissions
+
+= link_to developers_path do
+  &laquo;
+  Back to the Developers
+
+%h3= @developer.login
+
+%h4 Repositories
+.panels
+  .row
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:repositories_index]}")
+        .panel-heading
+          %b Listing
+        .panel-body
+          List and review available repositories.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:repositories_index] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:repositories_create]}")
+        .panel-heading
+          %b Creation
+        .panel-body
+          Makes able to create new repository.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:repositories_create] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:repositories_destroy]}")
+        .panel-heading
+          %b Deletion
+        .panel-body
+          Makes able to delete existing repository.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:repositories_destroy] }
+.clearfix
+%h4 Work spaces
+.panels
+  .row
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:spaces_index]}")
+        .panel-heading
+          %b Listing
+        .panel-body
+          List and review available work spaces.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:spaces_index] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:spaces_create]}")
+        .panel-heading
+          %b Creation
+        .panel-body
+          Makes able to create new work space.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:spaces_create] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:spaces_destroy]}")
+        .panel-heading
+          %b Deletion
+        .panel-body
+          Makes able to delete existing work space.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:spaces_destroy] }
+.clearfix
+%h4 Developers
+.panels
+  .row
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:developers_index]}")
+        .panel-heading
+          %b Listing
+        .panel-body
+          List and review available developers.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:developers_index] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:developers_create]}")
+        .panel-heading
+          %b Creation
+        .panel-body
+          Makes able to create new developer.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:developers_create] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:developers_destroy]}")
+        .panel-heading
+          %b Deletion
+        .panel-body
+          Makes able to delete existing developer.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:developers_destroy] }
+  .row
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:developers_allow]}")
+        .panel-heading
+          %b Allow
+        .panel-body
+          Makes able to allow a developer to push to the repository
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:developers_allow] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:developers_deny]}")
+        .panel-heading
+          %b Deny
+        .panel-body
+          Makes able to deny a developer from push to the repository
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:developers_deny] }
+.clearfix
+%h4 Keys
+.panels
+  .row
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:keys_index]}")
+        .panel-heading
+          %b Listing
+        .panel-body
+          List and review available keys.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:keys_index] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:keys_create]}")
+        .panel-heading
+          %b Creation
+        .panel-body
+          Makes able to create new key.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:keys_create] }
+    .col-md-4
+      .panel.panel-default(id="permission-#{Permission.values[:keys_destroy]}")
+        .panel-heading
+          %b Deletion
+        .panel-body
+          Makes able to delete existing key.
+        = render partial: 'developers/permissions/footer', locals: { value: Permission.values[:keys_destroy] }
+.clearfix

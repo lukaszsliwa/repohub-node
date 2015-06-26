@@ -1,0 +1,21 @@
+div.panels {
+  margin-top: 20px;
+}
+
+@mixin panel($body-height) {
+  margin: 15px 0 !important;
+  border: 1px solid #ddd;
+
+  .panel-header {
+    padding: 10px 0 0 15px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .panel-body {
+    min-height: $body-height;
+    margin-bottom: 15px;
+  }
+  .panel-footer {
+    font-size: 12px;
+  }
+}

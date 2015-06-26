@@ -1,0 +1,12 @@
+- allowed = @developer.repositories.exists?(repository.id)
+%tr(id="repository-#{repository.id}")
+  %td
+    - if allowed
+      %i.fa.fa-check
+  %td= repository.handle_with_space
+  %td
+    - if allowed
+      #{@developer.login}@#{request.host}:#{repository.path}
+  %td
+    = link_to 'Allow', developer_repository_path(@developer, repository, format: :js), method: :patch, remote: true, class: 'btn btn-default' if policy(@developer).allow?
+    = link_to 'Deny', developer_repository_path(@developer, repository, format: :js), method: :delete, remote: true, class: 'btn btn-default' if policy(@developer).deny?

@@ -1,0 +1,1 @@
+$('#permission-#{params[:id]} div.panel-footer').replaceWith('#{escape_javascript(render partial: 'developers/permissions/footer', locals: { allowed: true, value: params[:id].to_i })}');

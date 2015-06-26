@@ -1,0 +1,21 @@
+.col-xs-3(id="space-#{space.handle}")
+  .space
+    .panel-header
+      %i.fa.fa-folder
+      = space.handle
+    .panel-body
+      .row
+        .col-xs-6
+          %h4 Repositories
+          %b= space.repositories_count
+        .clearfix
+    .panel-footer
+      .pull-left
+        = space.handle
+      .pull-right
+        - if policy(:space).destroy?
+          - if space.repositories_count > 0
+            = link_to 'Delete', space_path(space.handle, format: :js), class: 'btn btn-sm btn-default', method: :delete, remote: true, data: { confirm: "#{pluralize space.repositories_count, 'repository'} will be removed. Do you really want to remove the #{space.handle} work space?" }
+          - else
+            = link_to 'Delete', space_path(space.handle, format: :js), class: 'btn btn-sm btn-default', method: :delete, remote: true, data: { confirm: 'Are you sure?' }
+      .clearfix

@@ -1,6 +1,9 @@
 require "securerandom"
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :registerable and :omniauthable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
   belongs_to :created_by, class_name: 'User'
 
   has_many :keys, dependent: :destroy
@@ -10,14 +13,21 @@ class User < ActiveRecord::Base
 
   has_many :spaces, through: :repositories
 
-  before_validation :generate_token
+  has_many :permissions, dependent: :destroy
+
+  before_validation :generate_token, :generate_password, on: :create
 
   after_create  :exec_client_user_create
   after_destroy :exec_client_user_destroy
 
   validates :login, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }, uniqueness: true, presence: true
-  validates :email, uniqueness: true, presence: true
   validates :token, uniqueness: true
+
+  mount_uploader :avatar, AvatarUploader
+
+  def generate_password
+    self.password = self.password_confirmation = Devise.friendly_token.first 8
+  end
 
   def generate_token
     begin

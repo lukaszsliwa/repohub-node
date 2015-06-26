@@ -1,0 +1,17 @@
+= content_for :title do
+  #{@repository.handle_with_space} &middot; Developers
+
+= link_to repositories_path do
+  &laquo;
+  Back to the Repositories
+
+%h3= @repository.handle_with_space
+
+%table.table
+  %thead
+    %th
+    %th Login
+    %th E-mail
+    %th
+  %tbody
+    = render partial: 'repositories/developers/developer', collection: @developers

@@ -1,0 +1,9 @@
+@import "mixins";
+
+div.domains {
+  @extend .panels;
+
+  div.domain {
+    @include panel(100px);
+  }
+}

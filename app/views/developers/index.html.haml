@@ -1,0 +1,13 @@
+= content_for :title do
+  Developers
+
+.container
+  .row
+    .developers-wrapper
+      - if policy(:developer).create?
+        .col-xs-3
+          .developer-form
+            = render partial: 'developers/new', locals: { developer: User.new }
+      .developers
+        = render partial: 'developers/developer', collection: @developers
+
