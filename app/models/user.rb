@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  def as_json(options = {})
+    options[:except] = [:avatar]
+    super options
+  end
+
   def generate_password
     self.password = self.password_confirmation = Devise.friendly_token.first 8
   end
