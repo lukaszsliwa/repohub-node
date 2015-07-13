@@ -4,7 +4,7 @@
 %li.spaces= link_to 'Work spaces', spaces_path, class: 'btn-xos' if policy(:space).index?
 %li.apps= link_to 'Apps', apps_path, class: 'btn-xos' if policy(:app).index?
 %li.dropdown
-  = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'}, role: 'button', class: 'btn-avatar' do
+  = link_to '#', data: {toggle: 'dropdown'}, role: 'button', class: 'btn-avatar dropdown-toggle' do
     = image_tag current_user.avatar.thumb, width: '32px', height: '32px', class: 'img-circle'
     = current_user.login
   %ul.dropdown-menu

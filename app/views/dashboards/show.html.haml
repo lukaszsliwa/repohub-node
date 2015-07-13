@@ -1,2 +1,19 @@
 = content_for :title do
   Dashboard
+
+- @notifications.group_by {|n| n.created_at.to_date }.each do |date, notifications|
+  .notifications-date
+    %i.fa.fa-calendar
+    &nbsp;
+    = l date, format: :short
+  .notifications
+    - notifications.each do |notification|
+      .notification(id="notification-#{notification.id}")
+        .notification-image.pull-left
+          = image_tag notification.image_with_extension, width: '48px'
+        .notification-subject.pull-left
+          = notification.subject
+          .notification-meta
+            Created on #{l notification.created_at, format: :short}, #{time_ago_in_words notification.created_at}
+        .clearfix
+

@@ -1,0 +1,37 @@
+.notifications-date {
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.notifications {
+  border-bottom: 1px solid #eee;
+
+  .notification {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eee #eee -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    padding: 10px;
+
+    .notification-image {
+
+    }
+
+    .notification-subject {
+      margin-left: 10px;
+      color: #4e575b;
+      font-weight: bold;
+
+      .notification-meta {
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+  }
+}

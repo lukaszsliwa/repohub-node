@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   before_validation :generate_token, :generate_password, on: :create
 
-  after_create  :exec_client_user_create
+  after_create  :exec_client_user_create, :create_notification
   after_destroy :exec_client_user_destroy
 
   validates :login, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }, uniqueness: true, presence: true
@@ -50,5 +50,9 @@ class User < ActiveRecord::Base
 
   def exec_client_user_destroy
     Exec::Client::User.delete login
+  end
+
+  def create_notification
+    Notification.create(image: 'user', user: self, subject: "New user #{login} were successfully created.")
   end
 end

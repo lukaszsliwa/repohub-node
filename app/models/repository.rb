@@ -12,6 +12,8 @@ class Repository < ActiveRecord::Base
   before_create  :exec_client_repository_create
   before_destroy :exec_client_repository_delete
 
+  after_create :create_notification, :create_repository_user
+
   validates :handle, format: { with: /\A[a-z0-9][a-z0-9\-]+[a-z0-9]\Z/ }, uniqueness: {scope: :space_id}, presence: true
 
   scope :in_space, ->(space_id) { where(space_id: space_id) }
@@ -40,6 +42,14 @@ class Repository < ActiveRecord::Base
 
   def exec_client_repository_delete
     Exec::Client::Repository.delete token
+  end
+
+  def create_notification
+    Notification.create(image: 'repository', subject: "The repository #{handle_with_space} was successfully created.")
+  end
+
+  def create_repository_user
+    RepositoryUser.create(repository_id: id, user_id: created_by_id)
   end
 
   def as_json(options = {})
