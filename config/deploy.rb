@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'api'
-set :repo_url, 'git@git.apptamers.com:repohub/api.git'
+set :application, 'node'
+set :repo_url, 'lukasz@git.apptamers.com:repofs/node.git'
 
 set :deploy_to, '/var/www/api-repofs'
 
