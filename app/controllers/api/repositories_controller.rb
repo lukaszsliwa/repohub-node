@@ -14,6 +14,8 @@ class Api::RepositoriesController < Api::ApplicationController
     @repository.created_by = current_user
     @repository.save!
 
+    @repository.users << current_user
+
     render json: @repository
   end
 
